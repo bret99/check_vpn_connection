@@ -9,10 +9,11 @@ ip_to_check () {
     IP_TO_CHECK=$(curl ifconfig.me)
     if [ "$IP_TO_CHECK" == "$IP" ]
     then echo ""
-    elif [ "$IP_TO_CHECK" == ""  ]
-    then notify "Can't connect to internet\nPlease check your settings" && exit 0
     else notify "Exit node changed\nCheck your settings"
-    fi 
+    fi
+    if [ "$IP_TO_CHECK" == "" ]
+    then notify "Can't connect to network" && exit 0
+    fi
 }
 
 main () {
